@@ -237,6 +237,7 @@ from module2 import foo as f2
 f1()    # hello, world!
 f2()    # goodbye, world!
 
+# >>字符串的使用<<
 (16)
 # 切片
 # 对字符串进行切片，运算符是[i:j:k]，其中i是开始索引，索引对应的字符可以取到；
