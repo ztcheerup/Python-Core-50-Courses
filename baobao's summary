@@ -108,6 +108,16 @@ while num > 0:
     num //= 10
 print(reversed_num)
 
+或者
+整型：
+num=int(input('please input a num:'))
+print(int(str(num)[::-1]))
+
+字符型：
+string=input('please input a string:')
+print(string[::-1])
+
+
 (8)
 《百钱百鸡》问题:穷举法，也称为暴力搜索法
 for x in range(0, 21):
