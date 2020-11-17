@@ -1,0 +1,120 @@
+# coding: UTF-8
+# 开发人员: 张婷童鞋
+# 开发时间: 2020-11-11
+
+>>运算符<<
+(1)
+f = float(input('请输入华氏温度: '))
+c = (f - 32) / 1.8
+print('%.1f华氏度 = %.1f摄氏度' %(f,c))
+"""%.1f是一个占位符，稍后会由一个float类型的变量值替换掉它。同理，如果字符串中有%d，
+后面可以用一个int类型的变量值替换掉它，而%s会被字符串的值替换掉。
+"""
+
+print(f'{f:.1f}华氏度 = {c:.1f}摄氏度')
+"""f-string提供了一种方法，可以在字符串文字中嵌入表达式，使用最小的语法。
+应注意：f-string实际上是在运行时计算的表达式，而不是一个常量值。
+在Python源代码中，f-string是一个文本字符串，前缀为f，其中包含括号内的表达式。表达式被替换为它们的值。
+"""
+
+补充：
+"""
+w = 1
+print('%.2f' %w)    #在Python2.x和3.x都可用
+print({:.2f}.format(w))   #仅Python3.x可用
+两个print的输出都一样，只是一个利用了表达式，一个调用了方法，两个都为保留小数后两位
+
+print(f'{w:.2f}')    #Python3.6及以上可用，新增属性f-string
+f-string在形式上是以 f 或 F 修饰符引领的字符串（f'xxx'或 F'xxx'），以大括号 {} 标明被替换的字段；
+f-string在本质上并不是字符串常量，而是一个在运行时运算求值的表达式。
+参考：https://blog.csdn.net/yizhuanlu9607/article/details/89530982 或者 https://blog.csdn.net/yizhuanlu9607/article/details/89530982
+
+>>分支和循环<<
+(2)
+在Python中构造循环结构有两种做法，一种是for-in循环，一种是while循环。如果知道循环的次数，我们通常使用for循环；如果循环次数不能确定，可以用while循环。在循环中还可以使用break来提前结束循环。
+
+import random
+answer=random.randint(1,100)
+counter=0
+while True:
+    counter+=1
+    number=int(input('请输入：'))
+    if number<answer:
+        print('大一点')
+    elif number>answer:
+        print('小一点')
+    else:
+        print('恭喜你答对了')
+        break
+print(f'你总共猜了{counter}次')
+
+
+random模块：
+random.random() 用于生成一个0到1的随机浮点数：0<= n < 1.0
+random.uniform(a,b) 用于生成一个指定范围内的随机符点数，两个参数其中一个是上限，一个是下限。
+                    如果a > b，则生成的随机数n: b <= n <= a。如果 a <b， 则 a <= n <= b。
+random.randint(a, b) 用于生成一个指定范围内的整数。其中参数a是下限，参数b是上限，生成的随机数n: a <= n <= b。
+
+
+
+(3)
+九九乘法表
+for i in range(1, 10):
+    for j in range(1, i + 1):
+        print(f'{i}*{j}={i * j}', end='\t')
+    print()
+
+(4)
+输入一个正整数判断它是不是素数(素数指的是只能被1和自身整除的大于1的整数。)
+num = int(input('请输入一个正整数：'))
+end = int(num**0.5)
+is_prime = True
+for x in range(2, end+1):
+    if num % x == 0:
+        is_prime = False
+        break
+if is_prime and num !=1:
+    print(f'{num}是素数')
+else:
+    print(f'{num}不是素数')
+
+(5)
+输入两个正整数计算它们的最大公约数和最小公倍数
+x = int(input('x:'))
+y = int(input('y:'))
+if x > y:
+    x, y = y, x
+for factor in range(x, 0, -1):
+    if x % factor == 0 and y % factor == 0:
+        print(f'{x}和{y}的最大公倍数是{factor}')
+        print(f'{x}和{y}的最小公倍数是{x * y // factor}')
+        break
+
+(6)
+寻找水仙花数
+for num in range(100,1000):
+    low = num % 10
+    mid = num //10 % 10
+    high = num //100
+    if num == low**3 + mid**3 + high**3:
+        print(f'{num}是水仙花数')
+
+(7)
+正整数的反转
+num = int(input('num = '))
+reversed_num = 0
+while num > 0:
+    reversed_num = reversed_num * 10 + num % 10
+    num //= 10
+print(reversed_num)
+
+(8)
+《百钱百鸡》问题:穷举法，也称为暴力搜索法
+for x in range(0, 21):
+    for y in range (0, 34):
+        z = 100 - x - y
+        if 5 * x + 3 * y + z // 3 ==100 and z % 3 == 0:    #小鸡只数须为3的倍数，不零卖，若不考虑钱的整数，可删除and后语句。
+            print(f'公鸡：{x}只，母鸡：{y}只，小鸡：{z}只')
+
+
+
